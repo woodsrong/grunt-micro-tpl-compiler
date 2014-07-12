@@ -1,4 +1,2 @@
-grunt-micro-tpl-compiler
-========================
-
-micro template compiler
+grunt-micro-tpl-compile
+=======================
