@@ -13,6 +13,13 @@ module.exports = function (grunt) {
             options: {
 
             },
+	        demo: {
+		        expand: true,
+		        cwd: 'demo/src',
+		        src: '**/*.mtpl.html',
+		        dest: 'demo/build',
+		        ext: '-mtpl.js'
+	        },
             build: {
                 src: '',
                 dest: ''
@@ -27,7 +34,7 @@ module.exports = function (grunt) {
     grunt.loadTasks('tasks');
 
     // These plugins provide necessary tasks.
-    grunt.loadNpmTasks('grunt-contrib-qunit');
+    grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-watch');
 
@@ -35,5 +42,5 @@ module.exports = function (grunt) {
     grunt.registerTask('default', ['jshint']);
 
     // Demo task.
-    grunt.registerTask('demo', ['jshint']);
+    grunt.registerTask('demo', ['mtc:demo']);
 };

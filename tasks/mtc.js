@@ -6,27 +6,22 @@
 
 module.exports = function (grunt) {
 	'use strict';
-	var compiler = require('../lib/')
+	var compiler = require('./lib/compiler')
 
-	grunt.registerTask('mtc', 'micro template compiler', function () {
+	grunt.registerMultiTask('mtc', 'micro template compiler', function () {
 		var options = this.options({
-
+			wrap: 'kmd'
 		});
 
 		this.files.forEach(function (file) {
-			var valid = file.src.filter(function (filepath) {
+			file.src.map(function (filepath) {
 				// Warn on and remove invalid source files (if nonull was set).
 				if (!grunt.file.exists(filepath)) {
-					grunt.log.warn('Source file ' + filepath + ' not found.');
-					return false;
-				} else {
-					return true;
+					return grunt.log.warn('Source file ' + filepath + ' not found.');
 				}
-			});
 
-			valid.map(function (file) {
-				var src = grunt.file.read(file);
-				var dest = compiler.process(src);
+				var src = grunt.file.read(filepath),
+					dest = compiler.process(src);
 
 				if (dest.length === 0) {
 					return grunt.log.warn('Destination not written because minified CSS was empty.');
@@ -37,7 +32,6 @@ module.exports = function (grunt) {
 				}
 
 				grunt.file.write(file.dest, dest);
-
 				grunt.log.writeln('File ' + file.dest + ' created');
 			});
 		});
