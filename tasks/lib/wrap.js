@@ -16,17 +16,23 @@ var wrapMap = {
         after: ''
     },
     kissy: {
+        before: 'KISSY.add(function (S, require, module, exports) {\n module.exports = ',
+        after: '});'
+    },
+    nodejs: {
         before: '',
         after: ''
     },
-    nodejs: {
+    default: {
         before: '',
         after: ''
     }
 };
 
-module.exports = function (code, wrap) {
-    var wrapConfig;
+module.exports = function (code, opts) {
+    opts = opts || {};
+    var wrap = opts.wrap || 'default',
+        wrapConfig;
 
     if (typeof wrap == 'string') {
         wrapConfig = wrapMap[wrap];
