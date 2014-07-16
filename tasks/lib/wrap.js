@@ -16,7 +16,7 @@ var wrapMap = {
         after: ''
     },
     kissy: {
-        before: 'KISSY.add(function (S, require, module, exports) {\n module.exports = ',
+        before: 'KISSY.add(function (S, require, exports, module) {\n module.exports = ',
         after: '});'
     },
     nodejs: {

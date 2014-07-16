@@ -11,7 +11,7 @@ module.exports = function (grunt) {
     grunt.initConfig({
         mtc: {
             options: {
-
+				wrap: 'kissy'
             },
 	        demo: {
 		        expand: true,

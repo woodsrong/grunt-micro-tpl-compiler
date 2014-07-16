@@ -7,10 +7,11 @@
 module.exports = function (grunt) {
 	'use strict';
 	var compiler = require('./lib/compiler')
+	var wrap = require('./lib/wrap')
 
 	grunt.registerMultiTask('mtc', 'micro template compiler', function () {
 		var options = this.options({
-			wrap: 'kmd'
+			wrap: 'default'
 		});
 
 		this.files.forEach(function (file) {
@@ -26,6 +27,8 @@ module.exports = function (grunt) {
 				if (dest.length === 0) {
 					return grunt.log.warn('Destination not written because minified CSS was empty.');
 				}
+
+				dest = wrap(dest, options);
 
 				if (options.banner) {
 					dest = options.banner + grunt.util.linefeed + dest;
