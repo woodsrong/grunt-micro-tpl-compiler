@@ -1,6 +1,7 @@
 grunt-micro-tpl-compiler
 =======================
 > micro template compiler in Grunt version.
+> grunt micro template编译器，将micro template提前预编译为function，提升模板性能。编译后的模板可通过配置支持seajs,requirejs,kissy,nodejs模块化，也可以完全自定义配置项wrap配置编译后代码的前后包裹。
 
 ## Getting Started
 This plugin requires Grunt `^0.4.0`
@@ -30,5 +31,13 @@ Prefix the compressed source with the given banner, with a linebreak inbetween.
 
 Type: `String|Object`
 Default: `default`
-
+```js
+/**
+ * wrap options
+ */
+wrap {
+    before: 'KISSY.add(function (S, require, exports, module) {\n module.exports = ',
+    after: '});'
+}
+```
 wrapper the compiled template codes, such as 'requirejs', 'nodejs', 'seajs', 'kissy' .etc.
