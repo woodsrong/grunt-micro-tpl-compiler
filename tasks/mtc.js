@@ -24,11 +24,16 @@ module.exports = function (grunt) {
 				var src = grunt.file.read(filepath),
 					dest = compiler.process(src);
 
-				if (dest.length === 0) {
-					return grunt.log.warn('Destination not written because minified CSS was empty.');
-				}
+                try {
+                    dest = compiler.process(src)
+                }
+                catch (e) {
+                    return grunt.log.warn(e.toString());
+                }
 
-				dest = wrap(dest, options);
+                if (dest.length === 0) {
+                    return grunt.log.warn('Destination not written because minified CSS was empty.');
+                }
 
 				if (options.banner) {
 					dest = options.banner + grunt.util.linefeed + dest;
