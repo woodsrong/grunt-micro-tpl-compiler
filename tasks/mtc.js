@@ -21,7 +21,9 @@ module.exports = function (grunt) {
 					return grunt.log.warn('Source file ' + filepath + ' not found.');
 				}
 
-				var src = grunt.file.read(filepath),
+				var 
+                    stamp = new Date(),
+                    src = grunt.file.read(filepath),
 					dest = compiler.process(src);
 
                 try {
@@ -40,7 +42,7 @@ module.exports = function (grunt) {
 				}
 
 				grunt.file.write(file.dest, dest);
-				grunt.log.writeln('File ' + file.dest + ' created');
+				grunt.log.writeln('File ' + file.dest + ' created (' + ( new Date() - stamp ) / 1000 + ')');
 			});
 		});
 	});
