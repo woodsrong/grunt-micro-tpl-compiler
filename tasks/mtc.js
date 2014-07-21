@@ -42,7 +42,7 @@ module.exports = function (grunt) {
 				}
 
 				grunt.file.write(file.dest, dest);
-				grunt.log.writeln('File ' + file.dest + ' created (' + ( new Date() - stamp ) / 1000 + ')');
+				grunt.log.writeln('File ' + file.dest + ' created (' + ( new Date() - stamp ) / 1000 + 's)');
 			});
 		});
 	});
