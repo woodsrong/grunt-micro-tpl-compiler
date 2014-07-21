@@ -39,7 +39,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
 
     // Default task.
-    grunt.registerTask('default', ['jshint']);
+    grunt.registerTask('default', ['demo']);
 
     // Demo task.
     grunt.registerTask('demo', ['mtc:demo']);

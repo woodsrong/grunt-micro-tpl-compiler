@@ -8,15 +8,15 @@
 
 var wrapMap = {
     requirejs: {
-        before: 'define(function (require, exports, module) {\n return',
+        before: 'define(function (require, exports, module) {\n return ',
         after: '});'
     },
     seajs: {
-        before: 'define(function (require, exports, module) {\n return',
+        before: 'define(function (require, exports, module) {\n return ',
         after: '});'
     },
     kissy: {
-        before: 'KISSY.add(function (S, require, exports, module) {\n return',
+        before: 'KISSY.add(function (S, require, exports, module) {\n return ',
         after: '});'
     },
     nodejs: {
