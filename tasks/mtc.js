@@ -22,9 +22,9 @@ module.exports = function (grunt) {
 				}
 
 				var 
-                    stamp = new Date(),
+                    beforeCompileTimeStamp = new Date(),
                     src = grunt.file.read(filepath),
-					dest = compiler.process(src);
+					dest;
 
                 try {
                     dest = compiler.process(src)
@@ -42,7 +42,7 @@ module.exports = function (grunt) {
 				}
 
 				grunt.file.write(file.dest, dest);
-				grunt.log.writeln('File ' + file.dest + ' created (' + ( new Date() - stamp ) / 1000 + 's)');
+				grunt.log.writeln('File ' + file.dest + 'created  (' + ( new Date() - beforeCompileTimeStamp ) / 1000 + 's)');
 			});
 		});
 	});
