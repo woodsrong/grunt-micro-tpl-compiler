@@ -24,7 +24,7 @@ var wrapMap = {
         after: ''
     },
     default: {
-        before: '',
+        before: 'var mtpl = ',
         after: ''
     }
 };
