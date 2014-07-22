@@ -27,7 +27,8 @@ module.exports = function (grunt) {
                     dest;
 
                 try {
-                    dest = compiler.process(src)
+                    dest = compiler.process(src, options);
+                    dest = wrap(dest, options);
                 }
                 catch (e) {
                     return grunt.log.warn(e.toString());
