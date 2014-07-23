@@ -8,6 +8,7 @@ grunt-micro-tpl-compiler
 * micro template uses js syntax directly, nearly zero learning costs `micro template直接使用js语法，近乎零学习成本`;
 * Template enhance operational performance by compiling micro template `通过编译micro template提升模板运行性能`;
 * Support template calls between each other `支持模板间互相调用`;
+* Support running Both at client (browser) and server (nodejs) Because of using js syntax `因为使用js语法，支持同时运行在client(浏览器)端和server(nodejs)端`;
 * Support prompt of template compilation error `支持模板编译报错提示`
 * Support prompt of line number in source template when running error `支持模板运行错误时提示源模板行号`
 
