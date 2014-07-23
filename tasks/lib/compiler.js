@@ -10,7 +10,7 @@ var uglify = require("uglify-js");
 
 module.exports = {
 	/**
-	 * process 编译代码
+	 * process compile the codes
 	 * @param code
 	 * @param opts
 	 * @returns {*}

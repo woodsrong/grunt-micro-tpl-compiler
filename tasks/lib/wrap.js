@@ -1,5 +1,5 @@
 /**
- * @Module
+ * @Module wrap
  * @Author xianqian.rxq@alibaba-inc.com
  * @Date 2014-07-16.
  */
@@ -8,15 +8,15 @@
 
 var wrapMap = {
     requirejs: {
-        before: 'define(function (require, exports, module) {\n return',
+        before: 'define(function (require, exports, module) {\n return ',
         after: '});'
     },
     seajs: {
-        before: 'define(function (require, exports, module) {\n return',
+        before: 'define(function (require, exports, module) {\n return ',
         after: '});'
     },
     kissy: {
-        before: 'KISSY.add(function (S, require, exports, module) {\n return',
+        before: 'KISSY.add(function (S, require, exports, module) {\n return ',
         after: '});'
     },
     nodejs: {
@@ -24,7 +24,7 @@ var wrapMap = {
         after: ''
     },
     default: {
-        before: '',
+        before: 'var mtpl = ',
         after: ''
     }
 };

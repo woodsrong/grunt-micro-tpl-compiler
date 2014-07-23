@@ -1,5 +1,6 @@
 KISSY.add(function (S, require, exports, module) {
- module.exports = function (data) {
+ // test
+ return function (data) {
     var p = "";
     p += "<h1>I‘m a list</h1>  <ul>  ";
     for (var i = 0, l = data.length; i < l; i++) p += "   ";
