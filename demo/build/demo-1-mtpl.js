@@ -1,4 +1,5 @@
 KISSY.add(function (S, require, exports, module) {
+ // test
  return function (data) {
     var p = "";
     p += "<h1>I‘m a list</h1>  <ul>  ";
