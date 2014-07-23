@@ -44,7 +44,6 @@ grunt.initConfig({
 		}
 	}
 });
-
 ```
 
 ### Options
@@ -73,7 +72,7 @@ wrap {
 wrapper the compiled template codes, such as 'requirejs', 'nodejs', 'seajs', 'kissy' .etc.
 
 ## Thanks
-thanks to [grunt-tplcompile](https://github.com/atrl/grunt-tplcompile) project by [atrl](https://github.com/atrl), most of the code of this project copied & modified from it.
+thanks to [grunt-tplcompile](https://github.com/atrl/grunt-tplcompile) project by [atrl](https://github.com/atrl), most of the code of this project are copied & modified from it when project started.
 
 ## Release History
 
