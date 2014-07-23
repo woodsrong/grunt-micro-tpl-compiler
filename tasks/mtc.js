@@ -1,5 +1,5 @@
 /**
- * @module compile
+ * @module mtc task
  * @author woodsrong@qq.com
  * @date 2014-07-13
  */
@@ -35,7 +35,7 @@ module.exports = function (grunt) {
                 }
 
                 if (dest.length === 0) {
-                    return grunt.log.warn('Destination not written because minified CSS was empty.');
+                    return grunt.log.warn('Destination not written because compiled tpl was empty.');
                 }
 
                 if (options.banner) {
