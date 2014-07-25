@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=320,initial-scale=1,minimum-scale=1, maximum-scale=1, user-scalable=no" />
+        <title>mtc example - kissy require</title>
+        <script type="text/javascript" src="http://g.assets.daily.taobao.net/kissy/k/1.4.2/seed.js"></script>
+    </head>
+    <body>
+        <h1>mtc example - kissy require</h1>
+        <div id="J_Cont" class="single-page">
+        </div>
+        <script>
+            KISSY.config({
+                packages: {
+                    'kissy-require': {
+                        base: '../build/kissy-require'
+                    }
+                },
+                combine: false,
+                ignorePackageNameInUri: true,
+                charset: 'utf-8',
+                debug: true
+            });
+
+            KISSY.use('node, kissy-require/layout-mtpl', function (S, Node, mtplLayout) {
+                var $ = Node.all;
+
+                $('#J_Cont').html(mtplLayout({
+                    desc: 'desc from js'
+                }));
+            });
+        </script>
+    </body>
+</html>

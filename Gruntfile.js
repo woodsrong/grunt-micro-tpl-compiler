@@ -16,11 +16,11 @@ module.exports = function (grunt) {
             options: {
 				wrap: 'kissy'
             },
-	        demo: {
+	        example: {
 		        expand: true,
-		        cwd: 'demo/src',
+		        cwd: 'example/src',
 		        src: '**/*.mtpl.html',
-		        dest: 'demo/build',
+		        dest: 'example/build',
 		        ext: '-mtpl.js'
 	        },
             test_wrap_default: {
@@ -93,10 +93,10 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
 
     // Default task.
-    grunt.registerTask('default', ['demo']);
+    grunt.registerTask('default', ['example']);
 
     // Demo task.
-    grunt.registerTask('demo', ['mtc:demo']);
+    grunt.registerTask('example', ['mtc:example']);
 
     // Unit test task.
     // NOTE: We run the task twice to check for file overwrite issues.
