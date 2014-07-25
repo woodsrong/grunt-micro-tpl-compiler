@@ -58,6 +58,17 @@ module.exports = function (grunt) {
                 src: 'test/fixtures/wrap/kissy.mtpl.html',
                 dest: 'test/actual/wrap/kissy-mtpl.js'
             },
+            test_wrap_function: {
+                options: {
+                    banner: '/** wrap with function */',
+                    wrap: function(code) {
+                        code = 'module.exports = ' + code;
+                        return code;
+                    }
+                },
+                src: 'test/fixtures/wrap/function.mtpl.html',
+                dest: 'test/actual/wrap/function-mtpl.js'
+            },
             test_with_banner: {
                 options: {
                     wrap: 'nodejs',

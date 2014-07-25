@@ -59,8 +59,14 @@ Prefix the compressed source with the given banner, with a linebreak inbetween.
 
 #### wrap
 
-Type: `String|Object`
-Choices: `'nodejs'`, `'requirejs'`, `'seajs'`, `'kissy'`, `'default'`, `{before: '', after: ''}`
+Type: `String|Object|function`
+Choices: `'nodejs'`, `'requirejs'`, `'seajs'`, `'kissy'`, `'default'`, `{before: '', after: ''}` or
+```js
+function(code) {
+    //do something
+    return code;
+}
+```
 Default: `default`
 ```js
 /**

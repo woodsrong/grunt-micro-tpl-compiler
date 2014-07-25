@@ -15,7 +15,7 @@ module.exports = {
 	 * @param opts
 	 * @returns {*}
 	 */
-	process: function (code, opts) {
+	process: function (code, options) {
 		//get Variables
 		var Variables = [
 			// Global object properties
@@ -103,10 +103,6 @@ module.exports = {
 		});
 
 		var ast2 = ast.transform(transformer);
-
-		//clear with
-		// var withBody = ast2.body[0].body[1].body.body;
-		// [].splice.apply(ast2.body[0].body, [1, 1].concat(withBody));
 
 		return ast2.print_to_string({
 			beautify: true
