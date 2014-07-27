@@ -29,13 +29,16 @@ var wrapMap = {
     }
 };
 
-module.exports = function (code, opts) {
-    opts = opts || {};
-    var wrap = opts.wrap || 'default',
+module.exports = function (code, options) {
+    options = options || {};
+    var wrap = options.wrap || 'default',
         wrapConfig;
 
     if (typeof wrap == 'string') {
         wrapConfig = wrapMap[wrap];
+    }
+    else if(typeof wrap == 'function') {
+        code = wrap(code);
     }
     else if (typeof wrap == 'object') {
         wrapConfig = wrap;
