@@ -1,13 +1,13 @@
 KISSY.add(function (S, require, exports, module) {
  return function (data) {
-    var p = "";
+    var p = "", line = 0;
     p += "";
     p += require("./header-mtpl")({
         desc: "I am desc"
     });
-    p += "  ";
+    p += " ";
     p += require("./body-mtpl")(data);
-    p += "  ";
+    p += " ";
     p += require("./footer-mtpl")();
     p += "";
     return p;

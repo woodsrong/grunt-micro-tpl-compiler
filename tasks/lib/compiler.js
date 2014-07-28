@@ -35,30 +35,31 @@ module.exports = {
 			'require', 'modue', 'exports'
 		];
 
-		var line = 0;
+		var line = 1;
 
 		// Figure out if we're getting a template, or if we need to
 		// load the template - and be sure to cache the result.
 		// Generate a reusable function that will serve as a template
 		// generator (and which will be cached).
-		var tmp = 'function anonymous(data){var p = "", line = 0;' +
+		var tmp = "function anonymous(data){var p='', line = 1;" +
 			// Introduce the data as local variables using with(){}
-			'p +="' +
+			"p +='" +
 			// Convert the template into pure JavaScript
 			code
-				.replace(/(.*?)\r?\n/gm, function($0, $1) {
-					return 'line = ' + (++line) + ';';
+				.replace(/\t/g, ' ')
+				.replace(/(\r?\n)/g, function($0, $1) {
+					line++;
+					return ' ';
 				})
-				.replace(/[\t]/g, ' ')
 				.split('<%').join('\t')
 				//replace str ' to \\'
 				.replace(/(?:(^|%>)([^\t]*))/g, function ($0, $1, $2) {
 					return $1 + $2.replace(/('|\\)/g, '\\$1')
 				})
-				.replace(/\t=(.*?)%>/g, '"; p+=$1; p+=')
-				.split('\t').join('";')
-				.split('%>').join('p +="')
-			+ '";return p;}';
+				.replace(/\t=(.*?)%>/g, "'; p+=$1; p+='")
+				.split('\t').join("';")
+				.split('%>').join("line = " + line + "; p +='")
+			+ "';return p;}";
 		var ast = uglify.parse(tmp);
 
 		var walker = new uglify.TreeWalker(function (node) {
