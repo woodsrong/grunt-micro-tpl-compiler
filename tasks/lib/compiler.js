@@ -6,7 +6,7 @@
 
 'use strict';
 
-var uglify = require("uglify-js");
+var uglify = require('uglify-js');
 
 module.exports = {
 	/**
@@ -15,7 +15,7 @@ module.exports = {
 	 * @param opts
 	 * @returns {*}
 	 */
-	process: function (code, options) {
+	process: function (code, opts) {
 		//get Variables
 		var Variables = [
 			// Global object properties
@@ -30,29 +30,35 @@ module.exports = {
 			//..
 			'undefined',
 			//UserAgent global properties
-			"Events", "Navigator", "Screen", "History", "Location", "window", "arguments",
+			'Events', 'Navigator', 'Screen', 'History', 'Location', 'window', 'arguments',
 			//common module argument
-			"require", "modue", "exports"
+			'require', 'modue', 'exports'
 		];
+
+		var line = 1;
 
 		// Figure out if we're getting a template, or if we need to
 		// load the template - and be sure to cache the result.
 		// Generate a reusable function that will serve as a template
 		// generator (and which will be cached).
-		var tmp = "function anonymous(data){var p='';" +
+		var tmp = "function anonymous(data){var p='', line = 1;" +
 			// Introduce the data as local variables using with(){}
 			"p +='" +
 			// Convert the template into pure JavaScript
 			code
-				.replace(/[\r\t\n]/g, " ")
-				.split("<%").join("\t")
+				.replace(/\t/g, ' ')
+				.replace(/(\r?\n)/g, function($0, $1) {
+					line++;
+					return ' ';
+				})
+				.split('<%').join('\t')
 				//replace str ' to \\'
 				.replace(/(?:(^|%>)([^\t]*))/g, function ($0, $1, $2) {
-					return $1 + $2.replace(/('|\\)/g, "\\$1")
+					return $1 + $2.replace(/('|\\)/g, '\\$1')
 				})
 				.replace(/\t=(.*?)%>/g, "'; p+=$1; p+='")
-				.split("\t").join("';")
-				.split("%>").join("p +='")
+				.split('\t').join("';")
+				.split('%>').join("line = " + line + "; p +='")
 			+ "';return p;}";
 		var ast = uglify.parse(tmp);
 
@@ -102,9 +108,13 @@ module.exports = {
 			}
 		});
 
-		var ast2 = ast.transform(transformer);
+		var transformedAst = ast.transform(transformer);
 
-		return ast2.print_to_string({
+		//clear with
+		// var withBody = ast2.body[0].body[1].body.body;
+		// [].splice.apply(ast2.body[0].body, [1, 1].concat(withBody));
+
+		return transformedAst.print_to_string({
 			beautify: true
 		}) || '';
 	}
