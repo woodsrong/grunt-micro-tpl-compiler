@@ -9,126 +9,148 @@
 var uglify = require('uglify-js');
 
 module.exports = {
-    /**
-     * process compile the codes
-     * @param code
-     * @param opts
-     * @returns {*}
-     */
-    process: function (code, options) {
-        //get Variables
-        var Variables = [
-            // Global object properties
-            // (http://www.ecma-international.org/publications/standards/Ecma-262.htm) 15.1
-            'NaN', 'Infinity', 'undefined',
-            'eval', 'parseInt', 'parseFloat', 'isNaN', 'isFinite', 'decodeURI',
-            'decodeURIComponent', 'encodeURI', 'encodeURIComponent',
-            'Object', 'Function', 'Array', 'String', 'Boolean', 'Number',
-            'Date', 'RegExp', 'Error', 'EvalError', 'RangeError',
-            'ReferenceError', 'SyntaxError', 'TypeError', 'URIError',
-            'Math', 'JSON',
-            //..
-            'undefined',
-            //UserAgent global properties
-            'Events', 'Navigator', 'Screen', 'History', 'Location', 'window', 'arguments',
-            //common module argument
-            'require', 'modue', 'exports'
-        ];
+	/**
+	 * process compile the codes
+	 * @param code
+	 * @param opts
+	 * @returns {*}
+	 */
+	process: function (code, options) {
+		//get Variables
+		var Variables = [
+			// Global object properties
+			// (http://www.ecma-international.org/publications/standards/Ecma-262.htm) 15.1
+			'NaN', 'Infinity', 'undefined',
+			'eval', 'parseInt', 'parseFloat', 'isNaN', 'isFinite', 'decodeURI',
+			'decodeURIComponent', 'encodeURI', 'encodeURIComponent',
+			'Object', 'Function', 'Array', 'String', 'Boolean', 'Number',
+			'Date', 'RegExp', 'Error', 'EvalError', 'RangeError',
+			'ReferenceError', 'SyntaxError', 'TypeError', 'URIError',
+			'Math', 'JSON',
+			//..
+			'undefined',
+			//UserAgent global properties
+			'Events', 'Navigator', 'Screen', 'History', 'Location', 'window', 'arguments',
+			//common module argument
+			'require', 'modue', 'exports'
+		];
 
-        var line = 1;
+		var line = 1;
 
-        // Figure out if we're getting a template, or if we need to
-        // load the template - and be sure to cache the result.
-        // Generate a reusable function that will serve as a template
-        // generator (and which will be cached).
-        var tmp = "function anonymous(data){var p='';" +
-            // Introduce the data as local variables using with(){}
-            "p +='" +
-            // Convert the template into pure JavaScript
-            this.parse(code, options)
-            + "';return p;}";
-        var ast = uglify.parse(tmp);
+		// Figure out if we're getting a template, or if we need to
+		// load the template - and be sure to cache the result.
+		// Generate a reusable function that will serve as a template
+		// generator (and which will be cached).
+		var tmp = "function anonymous(data){var p='';" +
+			// Convert the template into pure JavaScript
+			this.parse(code, options)
+			+ "return p;}";
+		var ast = uglify.parse(tmp);
 
-        var walker = new uglify.TreeWalker(function (node) {
-            //Variables
-            if (node instanceof uglify.AST_Var) {
-                // string_template is a cute little function that UglifyJS uses for warnings
-                for (var i = 0, item; item = node.definitions[i]; i++) {
-                    Variables.push(item.name.name);
-                }
-            }
+		var walker = new uglify.TreeWalker(function (node) {
+			//Variables
+			if (node instanceof uglify.AST_Var) {
+				// string_template is a cute little function that UglifyJS uses for warnings
+				for (var i = 0, item; item = node.definitions[i]; i++) {
+					Variables.push(item.name.name);
+				}
+			}
 
-            //function name
-            if (node instanceof uglify.AST_Defun) {
-                Variables.push(node.name.name);
-            }
+			//function name
+			if (node instanceof uglify.AST_Defun) {
+				Variables.push(node.name.name);
+			}
 
-            //function arguments
-            if (node instanceof uglify.AST_SymbolFunarg) {
-                Variables.push(node.name);
-            }
-        });
+			//function arguments
+			if (node instanceof uglify.AST_SymbolFunarg) {
+				Variables.push(node.name);
+			}
+		});
 
-        ast.walk(walker);
+		ast.walk(walker);
 
-        var symbolMap = {};
+		var symbolMap = {};
 
-        for (var i = 0, symbol; symbol = Variables[i]; i++) {
-            symbolMap[symbol] = true;
-        }
+		for (var i = 0, symbol; symbol = Variables[i]; i++) {
+			symbolMap[symbol] = true;
+		}
 
-        // transform and print
-        var withExpression = 'data';
-        var transformer = new uglify.TreeTransformer(null, function (node) {
-            //clear function name
-            if (node instanceof uglify.AST_Defun) {
-                if (node.name.name == 'anonymous') {
-                    node.name.name = '';
-                }
-            }
+		// transform and print
+		var withExpression = 'data';
+		var transformer = new uglify.TreeTransformer(null, function (node) {
+			//clear function name
+			if (node instanceof uglify.AST_Defun) {
+				if (node.name.name == 'anonymous') {
+					node.name.name = '';
+				}
+			}
 
-            //add data scope
-            if (node instanceof uglify.AST_Symbol) {
-                if (!symbolMap[node.name]) {
-                    node.name = withExpression + '.' + node.name
-                }
-            }
-        });
+			//add data scope
+			if (node instanceof uglify.AST_Symbol) {
+				if (!symbolMap[node.name]) {
+					node.name = withExpression + '.' + node.name
+				}
+			}
+		});
 
-        var transformedAst = ast.transform(transformer);
+		var transformedAst = ast.transform(transformer);
 
-        //clear with
-        // var withBody = ast2.body[0].body[1].body.body;
-        // [].splice.apply(ast2.body[0].body, [1, 1].concat(withBody));
+		//clear with
+		// var withBody = ast2.body[0].body[1].body.body;
+		// [].splice.apply(ast2.body[0].body, [1, 1].concat(withBody));
 
-        return transformedAst.print_to_string({
-            beautify: true
-        }) || '';
-    },
+		return transformedAst.print_to_string({
+			beautify: true
+		}) || '';
+	},
 
-    parse: function (code, options) {
-        var line = 1;
+	parse: function (code, options) {
+		var line = 1,
+			parsedCode = '',
+			openTagCount = 0,
+			closeTagCount = 0;
 
-        var _parse = function(code) {
-            return "p +='" + code
-                .replace(/[\r\t\n]/g, " ")
-                .split("<%").join("\t")
-                //replace str ' to \\'
-                .replace(/(?:(^|%>)([^\t]*))/g, function($0, $1, $2){
-                    return $1 + $2.replace(/('|\\)/g, "\\$1")
-                })
-                .replace(/\t=(.*?)%>/g, "'; p+=$1; p+='")
-                .split("\t").join("';")
-                .split("%>").join("p +='")
-                + "';";
-        }
+		var _parse = function (code) {
+			return "p +='" + code
+				.replace(/[\r\t\n]/g, " ")
+				.split("<%").join("\t")
+				//replace str ' to \\'
+				.replace(/(?:(^|%>)([^\t]*))/g, function ($0, $1, $2) {
+					return $1 + $2.replace(/('|\\)/g, "\\$1")
+				})
+				.replace(/\t=(.*?)%>/g, "'; p+=$1; p+='")
+				.split("\t").join("';")
+				.split("%>").join("p +='")
+				+ "';";
+		}
 
-        code = code.split(/\r?\n/);
+		code = code.split(/\r?\n/);
 
-        code.forEach(function(code, index) {
-            code = 'line = ' + (index+1) + '; ' + _parse(code);
-        });
+		code.forEach(function (code, index) {
+			if (/<%|%>/.test(code)) {
+				var matchedOpenTag = code.match(/<%/g),
+					matchedCloseTag = code.match(/%>/g),
+					openTagLen = matchedOpenTag && matchedOpenTag.length || 0,
+					closeTagLen = matchedCloseTag && matchedCloseTag.length || 0;
 
-        return code.join('\r\n');
-    }
+				openTagCount += openTagLen;
+				closeTagCount += closeTagLen;
+
+				if (openTagLen > closeTagLen) {
+					code += ' %>';
+				}
+				else if (openTagLen < closeTagLen) {
+					code = '<% ' + code;
+				}
+			}
+			else if (openTagCount != closeTagCount) {
+				code = '<% ' + code + ' %>';
+			}
+
+//			parsedCode += 'line = ' + (index + 1) + '; ' + _parse(code);
+			parsedCode += _parse(code);
+		});
+
+		return parsedCode;
+	}
 };
