@@ -11,7 +11,8 @@ module.exports = function (grunt) {
 
     grunt.registerMultiTask('mtc', 'micro template compiler', function () {
         var options = this.options({
-            wrap: 'default'
+            wrap: 'default',
+            lineNumber: false
         });
 
         this.files.forEach(function (file) {

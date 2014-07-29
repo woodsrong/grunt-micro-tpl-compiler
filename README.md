@@ -57,6 +57,13 @@ Default: `''`
 
 Prefix the compressed source with the given banner, with a linebreak inbetween.
 
+#### lineNumber
+
+Type: `Boolean`
+Default: `false`
+
+Support prompt of line number in source template when running error, default is false.
+
 #### wrap
 
 Type: `String|Object|function`
