@@ -1,27 +1,50 @@
 KISSY.add(function (S, require, exports, module) {
  return function (data) {
     var p = "", line = 0;
-    p += "<h1>I‘m a list</h1> <ul> ";
-    for (var i = 0, l = data.length; i < l; i++) {
-        var cur = data[i] || {};
-        line = 14;
-        p += "  <li>name: ";
-        p += cur.name;
-        p += "</li>  <li>age: ";
-        p += cur.name;
-        p += "</li>  <li>sex: ";
-        p += cur.name;
-        p += "</li>  ";
-        if (cur.title) {
+    try {
+        line = 1;
+        var a;
+        line = 2;
+        p += "<h1>I‘m a list</h1>";
+        line = 3;
+        p += "<ul>";
+        line = 4;
+        line = 5;
+        for (var i = 0, l = data.length; i < l; i++) {
+            line = 6;
+            var cur = data[i] || {};
+            line = 7;
+            line = 8;
+            p += " <li>name: ";
+            p += cur.name;
+            p += "</li>";
+            line = 9;
+            p += " <li>age: ";
+            p += cur.name;
+            p += "</li>";
+            line = 10;
+            p += " <li>sex: ";
+            p += cur.name;
+            p += "</li>";
+            line = 11;
+            p += " ";
+            if (cur.title) {
+                line = 12;
+                p += " <li>title: ";
+                p += cur.title;
+                p += "</li>";
+                line = 13;
+                p += " ";
+            }
             line = 14;
-            p += "  <li>title: ";
-            p += cur.title;
-            p += "</li>  ";
         }
-        line = 14;
-        p += " ";
+        line = 15;
+        p += "</ul>";
+    } catch (e) {
+        if (window.console) {
+            console.error("line", line);
+            console.error("error", e.toString());
+        }
     }
-    line = 14;
-    p += " </ul>";
     return p;
 }});
