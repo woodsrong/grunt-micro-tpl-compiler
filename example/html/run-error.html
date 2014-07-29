@@ -6,14 +6,14 @@
         <script type="text/javascript" src="http://g.assets.daily.taobao.net/kissy/k/1.4.2/seed.js"></script>
     </head>
     <body>
-        <h1>mtc example - kissy require</h1>
+        <h1> mtc example - prompt of running error</h1>
         <div id="J_Cont">
         </div>
         <script>
             KISSY.config({
                 packages: {
-                    'kissy-require': {
-                        base: '../build/kissy-require'
+                    'run-error': {
+                        base: '../build/run-error'
                     }
                 },
                 combine: false,
@@ -22,11 +22,11 @@
                 debug: true
             });
 
-            KISSY.use('node, kissy-require/layout-mtpl', function (S, Node, mtplLayout) {
+            KISSY.use('node, run-error/main-mtpl', function (S, Node, mainMtpl) {
                 var $ = Node.all;
 
-                $('#J_Cont').html(mtplLayout({
-                    desc: 'desc from js'
+                $('#J_Cont').html(mainMtpl({
+                    name: 'aliqin'
                 }));
             });
         </script>

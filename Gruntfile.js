@@ -17,6 +17,9 @@ module.exports = function (grunt) {
 				wrap: 'kissy'
             },
 	        example: {
+                options: {
+                    lineNumber: true
+                },
 		        expand: true,
 		        cwd: 'example/src',
 		        src: '**/*.mtpl.html',
