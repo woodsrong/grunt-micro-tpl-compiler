@@ -26,12 +26,18 @@ module.exports = function (grunt) {
                     src = grunt.file.read(filepath),
                     dest;
 
+                options.filepath = filepath;
+
                 try {
                     dest = compiler.process(src, options);
                     dest = wrap(dest, options);
                 }
                 catch (e) {
-                    return grunt.log.warn(e.toString());
+                    grunt.log.error('Compiled Error');
+                    grunt.log.warn('Source mtpl filepath: "' + filepath + '"');
+                    grunt.log.warn('Line Number: ' + e.line);
+                    grunt.log.warn(e.message);
+                    return;
                 }
 
                 if (dest.length === 0) {

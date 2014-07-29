@@ -1,6 +1,6 @@
 KISSY.add(function (S, require, exports, module) {
  return function (data) {
-    var p = "", line = 0;
+    var p = "", line = 0, filepath = "example/src/base.mtpl.html";
     try {
         line = 1;
         var a;
@@ -42,8 +42,9 @@ KISSY.add(function (S, require, exports, module) {
         p += "</ul>";
     } catch (e) {
         if (window.console) {
-            console.error("line", line);
-            console.error("error", e.toString());
+            console.error("Source mtpl filepath: '" + filepath + "'");
+            console.error("Line Number: " + line);
+            console.error(e.toString());
         }
     }
     return p;

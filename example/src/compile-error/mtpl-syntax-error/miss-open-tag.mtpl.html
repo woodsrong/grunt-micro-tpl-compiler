@@ -1,0 +1,14 @@
+<% var a;%>
+<h1>I‘m a list</h1>
+<ul>
+    for(var i = 0, l = data.length; i < l; i++)
+    var cur = data[i] || {};
+    %>
+    <li>name: <%= cur.name%></li>
+    <li>age: <%= cur.name%></li>
+    <li>sex: <%= cur.name%></li>
+    <% if(cur.title){ %>
+    <li>title: <%= cur.title%></li>
+    <% } %>
+    <% } %>
+</ul>

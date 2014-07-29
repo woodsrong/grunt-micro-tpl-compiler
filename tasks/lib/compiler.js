@@ -35,13 +35,11 @@ module.exports = {
             'e'
         ];
 
-        var line = 1;
-
         // Figure out if we're getting a template, or if we need to
         // load the template - and be sure to cache the result.
         // Generate a reusable function that will serve as a template
         // generator (and which will be cached).
-        var tmp = "function anonymous(data){var p = '', line = 0;" +
+        var tmp = "function anonymous(data){var p = '', line = 0, filepath = '" + options.filepath + "';" +
             // Convert the template into pure JavaScript
             this.parse(code, options)
             + "return p;}";
@@ -112,12 +110,11 @@ module.exports = {
      */
     parse: function (code, options) {
         var self = this,
-            line = 1,
             parsedCode = '',
             openTagCount = 0,
             closeTagCount = 0;
 
-        if(options.lineNumber) {
+        if (options.lineNumber) {
             code = code.split(/\r?\n/);
 
             code.forEach(function (codeSnip, index) {
@@ -146,8 +143,9 @@ module.exports = {
                     }
                 }
 
-                if(codeSnip) {
-                    parsedCode += 'line = ' + (index + 1) + '; ' + self._parseToPureJs(codeSnip);
+                if (codeSnip) {
+                    var codeLine = self._parseToPureJs(codeSnip);
+                    parsedCode += 'line = ' + (index + 1) + '; ' + codeLine + '\n';
                 }
             });
 
@@ -155,7 +153,7 @@ module.exports = {
             parsedCode = parsedCode.replace(/p\s*\+=\s*'';/g, "");
 
             //try catch
-            parsedCode = 'try {' + parsedCode + '} catch(e) { if(window.console) {console.error("line", line); console.error("error", e.toString());} }';
+            parsedCode = 'try {' + parsedCode + '} catch(e) { if(window.console) { console.error("Source mtpl filepath: \'" + filepath + "\'"); console.error("Line Number: " + line); console.error(e.toString());} }';
         }
         else {
             parsedCode += self._parseToPureJs(code);
