@@ -187,6 +187,7 @@ module.exports = {
 
 				throw e;
 			}
+			//js syntax error
 			else {
 				try {
 					uglify.parse(parsedCode);
