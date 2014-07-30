@@ -1,17 +1,25 @@
 grunt-micro-tpl-compiler [![NPM version](https://badge.fury.io/js/grunt-micro-tpl-compiler.png)](http://badge.fury.io/js/grunt-micro-tpl-compiler) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 =======================
 ![Npm Downloads](https://nodei.co/npm/grunt-micro-tpl-compiler.png?downloads=true&stars=true)
-> micro template compiler in Grunt version.
-`grunt micro template编译器，将micro template提前预编译为function，提升模板性能。编译后的模板可通过配置支持seajs,requirejs,kissy,nodejs模块化，也可以完全自定义配置项wrap配置编译后代码的前后包裹。`
+micro template compiler in Grunt version.
+
+> grunt micro template编译器，将micro template提前预编译为function，提升模板性能。编译后的模板可通过配置支持seajs,requirejs,kissy,nodejs模块化，也可以完全自定义配置项wrap配置编译后代码的前后包裹。`
 
 ## Features
 
-* micro template uses js syntax directly, nearly zero learning costs `micro template直接使用js语法，近乎零学习成本`;
-* Template enhance operational performance by compiling micro template `通过编译micro template提升模板运行性能`;
-* Support template calls between each other `支持模板间互相调用`;
-* Support running Both at client (browser) and server (nodejs) Because of using js syntax `因为使用js语法，支持同时运行在client(浏览器)端和server(nodejs)端`;
-* Support prompt of template compilation error `支持模板编译报错提示`
-* Support prompt of line number in source template when running error `支持模板运行错误时提示源模板行号`
+* micro template uses js syntax directly, nearly zero learning costs
+* Template enhance operational performance by compiling micro template
+* Support template calls between each other
+* Support running Both at client (browser) and server (nodejs) Because of using js syntax
+* Support prompt of error message and line number in source template when compiled error
+* Support prompt of error message and line number in source template when running into error
+
+> * micro template直接使用js语法，近乎零学习成本
+> * 通过编译micro template提升模板运行性能
+> * 支持模板间互相调用
+> * 因为使用js语法，支持同时运行在client(浏览器)端和server(nodejs)端
+> * 支持模板编译报错提示错误信息，源模板行号
+> * 支持模板运行错误时提示错误信息，源模板行号
 
 ## Getting Started
 This plugin requires Grunt `^0.4.0`
@@ -91,4 +99,6 @@ thanks to [grunt-tplcompile](https://github.com/atrl/grunt-tplcompile) project b
 
 ## Release History
 
- * 2014-08-01   v0.1.0 release first stable version `发布第一个正式版`.
+ * 2014-08-01   v0.1.0 release first beta version.
+
+ > * 2014-08-01   v0.1.0 发布第一个beta试用版
