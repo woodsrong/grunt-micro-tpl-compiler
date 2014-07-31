@@ -2,11 +2,6 @@ example
 ====
 
 ## dir description
-
-* src `source templates`
-* build `compiled templates`
-* html `html to run examples`
-
 * src `模板源文件`
 * build `编译后的模板文件`
 * html `用来运行example的html文件`
@@ -16,10 +11,10 @@ example
 ### src/base.mtpl.html
 micro template基本使用演示
 
-### src/compile-error/
+### src/compile-error
 提示编译错误演示
 
-### src/run-error/
+### src/run-error
 提示运行错误演示
 
 ### src/kissy-require
