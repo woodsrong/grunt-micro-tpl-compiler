@@ -8,6 +8,11 @@ example
 
 ## examples
 
+###运行
+```js
+grunt example
+```
+
 ### src/base.mtpl.html
 micro template基本使用演示
 
