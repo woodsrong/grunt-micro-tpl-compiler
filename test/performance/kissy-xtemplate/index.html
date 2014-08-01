@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=320,initial-scale=1,minimum-scale=1, maximum-scale=1, user-scalable=no" />
+        <title>mtc example - kissy require</title>
+        <script type="text/javascript" src="http://g.assets.daily.taobao.net/kissy/k/1.4.2/seed.js"></script>
+    </head>
+    <body>
+        <h1> mtc example - prompt of running error</h1>
+        <h2>mtpl</h2>
+        <div id="J_Cont1"></div>
+        <h2>xtpl</h2>
+        <div id="J_Cont2"></div>
+        <script>
+            KISSY.config({
+                packages: {
+                    'kissy-xtemplate': {
+                        base: 'tpl/build'
+                    }
+                },
+                combine: false,
+                ignorePackageNameInUri: true,
+                charset: 'utf-8',
+                debug: true
+            });
+
+            KISSY.use('node, xtemplate, kissy-xtemplate/test-mtpl,kissy-xtemplate/test-xtpl', function (S, Node, XTemplate, mtpl, xtpl) {
+                var $ = Node.all;
+                var data = [{
+                    name: '张三',
+                    age: '27',
+                    sex: '男',
+                    title: '资深工程师'
+                }, {
+                    name: '李四',
+                    age: '26',
+                    sex: '女',
+                    title: '高级工程师'
+                }, {
+                    name: '王五',
+                    age: '25',
+                    sex: '男',
+                    title: '助理工程师'
+                }, {
+                    name: '赵六',
+                    age: '24',
+                    sex: '男'
+                }];
+
+                var max = 100000;
+                var html;
+
+                S.later(function() {
+                    var i = max,
+                        start = + new Date();
+
+                    while(i-- > 0) {
+                        html = mtpl(data);
+                    }
+
+                    $('#J_Cont1').append(html);
+                    $('#J_Cont1').append('<p>run mtpl ' + max + ' times cost ' + (+new Date - start) + 'ms</p>');
+
+                    S.later(function() {
+                        var i = max,
+                            start = + new Date(),
+                            cachedXtpl = new XTemplate(xtpl);
+
+                        while(i-- > 0) {
+                            html = cachedXtpl.render(data);
+                        }
+
+                        $('#J_Cont2').append(html);
+                        $('#J_Cont2').append('<p>run xtpl ' + max + ' times cost ' + (+new Date - start) + 'ms</p>');
+
+
+                    });
+                });
+            });
+        </script>
+    </body>
+</html>

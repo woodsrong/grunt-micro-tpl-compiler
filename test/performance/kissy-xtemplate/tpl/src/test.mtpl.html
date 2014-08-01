@@ -1,0 +1,14 @@
+<h1>employees</h1>
+<ul>
+    <%
+    for(var i = 0, l = data.length; i < l; i++) {
+    var cur = data[i] || {};
+    %>
+    <li>name: <%= cur.name%></li>
+    <li>age: <%= cur.age%></li>
+    <li>sex: <%= cur.sex%></li>
+    <% if(cur.title){ %>
+    <li>title: <%= cur.title%></li>
+    <% } %>
+    <% } %>
+</ul>

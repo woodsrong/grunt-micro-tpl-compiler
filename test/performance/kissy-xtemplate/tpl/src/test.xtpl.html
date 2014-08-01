@@ -1,0 +1,11 @@
+<h1>employees</h1>
+<ul>
+    {{#each data}}
+    <li>name: {{name}}</li>
+    <li>age: {{age}}</li>
+    <li>sex: {{sex}}</li>
+    {{#if title}}
+    <li>title: {{title}}</li>
+    {{/if}}
+    {{/each}}
+</ul>
