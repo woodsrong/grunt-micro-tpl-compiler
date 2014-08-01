@@ -7,7 +7,7 @@
         <script type="text/javascript" src="http://g.assets.daily.taobao.net/kissy/k/1.4.2/seed.js"></script>
     </head>
     <body>
-        <h1> mtc example - prompt of running error</h1>
+        <h1> mtc example - performance comparison between micro tpl and kissy xtemplate</h1>
         <h2>mtpl</h2>
         <div id="J_Cont1"></div>
         <h2>xtpl</h2>
@@ -51,7 +51,7 @@
                 var max = 100000;
                 var html;
 
-                S.later(function() {
+                var runMtpl = function() {
                     var i = max,
                         start = + new Date();
 
@@ -61,20 +61,26 @@
 
                     $('#J_Cont1').append(html);
                     $('#J_Cont1').append('<p>run mtpl ' + max + ' times cost ' + (+new Date - start) + 'ms</p>');
+                }
+
+                var runXtpl = function() {
+                    var i = max,
+                        start = + new Date(),
+                        cachedXtpl = new XTemplate(xtpl);
+
+                    while(i-- > 0) {
+                        html = cachedXtpl.render(data);
+                    }
+
+                    $('#J_Cont2').append(html);
+                    $('#J_Cont2').append('<p>run xtpl ' + max + ' times cost ' + (+new Date - start) + 'ms</p>');
+                }
+
+                S.later(function() {
+                    runXtpl();
 
                     S.later(function() {
-                        var i = max,
-                            start = + new Date(),
-                            cachedXtpl = new XTemplate(xtpl);
-
-                        while(i-- > 0) {
-                            html = cachedXtpl.render(data);
-                        }
-
-                        $('#J_Cont2').append(html);
-                        $('#J_Cont2').append('<p>run xtpl ' + max + ' times cost ' + (+new Date - start) + 'ms</p>');
-
-
+                        runMtpl();
                     });
                 });
             });
