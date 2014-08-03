@@ -6,6 +6,7 @@ test
 * actual `实际编译后生成的文件`
 * expected `预期编译后生成的文件`
 * test `单元测试代码`
+* 性能测试
 
 ## Unit Test
 主要验证options里各项配置的生成
