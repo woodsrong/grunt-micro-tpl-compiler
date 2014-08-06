@@ -1,4 +1,4 @@
-grunt-micro-tpl-compiler [![NPM version](https://badge.fury.io/js/grunt-micro-tpl-compiler.png)](http://badge.fury.io/js/grunt-micro-tpl-compiler) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
+grunt-micro-tpl-compiler [![NPM version](https://badge.fury.io/js/grunt-micro-tpl-compiler.png)](http://badge.fury.io/js/grunt-micro-tpl-compiler)
 =======================
 ![Npm Downloads](https://nodei.co/npm/grunt-micro-tpl-compiler.png?downloads=true&stars=true)
 
