@@ -93,10 +93,6 @@ module.exports = {
 
 		var transformedAst = ast.transform(transformer);
 
-		//clear with
-		// var withBody = ast2.body[0].body[1].body.body;
-		// [].splice.apply(ast2.body[0].body, [1, 1].concat(withBody));
-
 		return transformedAst.print_to_string({
 			beautify: true
 		}) || '';
