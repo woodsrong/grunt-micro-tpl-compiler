@@ -1,0 +1,69 @@
+<table class="table table-headed table-hover table-trade">
+	<thead>
+	<tr>
+		<th width="10%">时间</th>
+		<th width="10%">对方编号</th>
+		<th width="10%">淘宝账号</th>
+		<th width="18%">商品名称</th>
+		<th width="10%">号码</th>
+		<th width="10%">卡类型</th>
+		<th width="12%">收货信息</th>
+		<th width="10%">交易状态</th>
+		<th>操作</th>
+	</tr>
+	</thead>
+	<tbody>
+	<%
+	var rows = data.table.rows;
+	for(var i = 0, l = rows.length; i < l; i ++){
+	var row = rows[i];
+	%>
+	<tr data-tradeId="<%= row.tradeId %>">
+		<td><%= row.time %></td>
+		<td>
+			<a data-tabIndex="0" href="javascript:void(0)" class="j_TradeDetail"><%= row.tradeId %></a>
+		</td>
+		<td><%= row.nick %></td>
+		<td>
+			<div class="table-trade-text-wrap">
+				<% if(row.itemName){ %>
+				<p><%= row.itemName %></p>
+				<% } %>
+				<% if(row.itemMeal){ %>
+				<p><%= row.itemMeal %></p>
+				<% } %>
+			</div>
+		</td>
+		<td><%= row.itemPhone %></td>
+		<td>
+			<% if(row.cardType){ %>
+			<%= row.cardType %>
+			<p><a data-type="1" href="javascript:void(0)" class="j_TradeModify">修改</a></p>
+			<% } %>
+		</td>
+		<td>
+			<div class="table-trade-text-wrap">
+				<% if(row.userName){ %>
+				<p><%= row.userName %></p>
+				<% } %>
+				<% if(row.userPhone){ %>
+				<p><%= row.userPhone %></p>
+				<% } %>
+				<% if(row.shippingAddress){ %>
+				<p><%= row.shippingAddress %></p>
+				<% } %>
+				<% if(row.userName || row.userPhone || row.shippingAddress){ %>
+				<p><a data-type="2" href="javascript:void(0)" class="j_TradeModify">修改</a></p>
+				<% } %>
+			</div>
+		</td>
+		<td><%= row.tradeStatus %></td>
+		<td>
+			<p><a data-tabIndex="0" href="javascript:void(0)" class="j_TradeDetail">订单详情</a></p>
+			<p><a data-type="3" href="javascript:void(0)" class="j_TradeModify">订单修改</a></p>
+			<p><a data-tabIndex="2" href="javascript:void(0)" class="j_TradeDetail">修改记录</a></p>
+		</td>
+	</tr>
+	<% } %>
+	</tbody>
+</table>

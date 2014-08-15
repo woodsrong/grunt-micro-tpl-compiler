@@ -1,0 +1,4 @@
+<option value="">请选择城市...</option>
+<% for(var i = 0; i < (subArea && subArea.length || 0); i++) {%>
+<option value="<%= subArea[i].code%>" <%if (subCode&&subCode==subArea[i].code) {%>selected="selected"<%}if(!subCode&&i===0) {%>selected="selected"<%}%>><%=subArea[i].name%></option>
+<% } %>
