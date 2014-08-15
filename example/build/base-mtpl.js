@@ -4,9 +4,7 @@ KISSY.add(function (S, require, exports, module) {
     try {
         line = 1;
         var a;
-        line = 2;
         p += "<h1>I‘m a list</h1>";
-        line = 3;
         p += "<ul>";
         line = 4;
         line = 5;
@@ -38,7 +36,6 @@ KISSY.add(function (S, require, exports, module) {
             }
             line = 14;
         }
-        line = 15;
         p += "</ul>";
     } catch (e) {
         if (window.console) {

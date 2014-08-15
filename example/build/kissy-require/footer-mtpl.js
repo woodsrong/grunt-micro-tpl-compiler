@@ -2,7 +2,6 @@ KISSY.add(function (S, require, exports, module) {
  return function (data) {
     var p = "", line = 0, filepath = "example/src/kissy-require/footer.mtpl.html";
     try {
-        line = 1;
         p += "<footer>&copy; 2014</footer>";
     } catch (e) {
         if (window.console) {

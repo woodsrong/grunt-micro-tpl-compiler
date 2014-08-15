@@ -115,6 +115,8 @@ module.exports = {
 
 			//parse line by line
 			codeArr.forEach(function (codeSnip, index) {
+                var needLine = true;
+
 				if (/<%|%>/g.test(codeSnip)) {
 					var matchedOpenTag = codeSnip.match(/<%/g),
 						matchedCloseTag = codeSnip.match(/%>/g),
@@ -139,10 +141,14 @@ module.exports = {
 						codeSnip = '<% ' + codeSnip + ' %>';
 					}
 				}
+                else {
+                    //pure html don't need tips of lineNumber
+                    needLine = false;
+                }
 
 				if (codeSnip) {
 					var codeLine = self._parseToPureJs(codeSnip);
-					parsedCode += 'line = ' + (index + 1) + '; ' + codeLine + '\n';
+					parsedCode += (needLine ? 'line = ' + (index + 1) + '; ' : '') + codeLine + '\n';
 				}
 			});
 
@@ -212,6 +218,7 @@ module.exports = {
 	_parseToPureJs: function (code) {
 		return "p +='" + code
 			.replace(/[\r\t\n]/g, " ")
+			.replace(/\s+/g, " ")
 			.split("<%").join("\t")
 			//replace str ' to \\'
 			.replace(/(?:(^|%>)([^\t]*))/g, function ($0, $1, $2) {
