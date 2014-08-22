@@ -25,10 +25,11 @@ js模板的性能瓶颈主要体现在以下两点
 > 数据如有错误，恳请指正
 
 ### 实验源文件
-test/performance/kissy-xtemplate
+* <https://github.com/aliqin/grunt-micro-tpl-compiler/tree/master/test/performance/kissy-xtemplate>
 
 ### jsperf实验结果
-
-[http://jsperf.com/performance-comparison-between-micro-tpl-and-kissy-xtem/4](http://jsperf.com/performance-comparison-between-micro-tpl-and-kissy-xtem/4)
+* <http://jsperf.com/performance-comparison-between-micro-tpl-and-kissy-xtem/4>
+* 说明
+ - mtpl和xtpl都已经预加载
 
 ![resukt](http://gtms04.alicdn.com/tps/i4/TB1RYrsFVXXXXXEXpXX3zh9_FXX-978-349.png)
