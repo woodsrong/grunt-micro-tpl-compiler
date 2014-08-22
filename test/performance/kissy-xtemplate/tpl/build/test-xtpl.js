@@ -17,7 +17,7 @@ KISSY.add('kissy-xtemplate/test-xtpl', function (S, require, exports, module) {
             buffer += '<h1>employees</h1>\n<ul>\n    ';
             var config0 = {};
             var params1 = [];
-            var id2 = getPropertyUtil(engine, scope, "this", 0, 3);
+            var id2 = getPropertyUtil(engine, scope, "data", 0, 3);
             params1.push(id2);
             config0.params = params1;
             config0.fn = function (scope) {
