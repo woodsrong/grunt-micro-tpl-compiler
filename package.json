@@ -2,19 +2,19 @@
     "name": "grunt-micro-tpl-compiler",
     "description": "",
     "version": "0.0.7",
-    "homepage": "https://github.com/aliqin/grunt-micro-tpl-compiler",
+    "homepage": "https://github.com/woodsrong/grunt-micro-tpl-compiler",
     "author": {},
     "repository": {
         "type": "git",
-        "url": "https://github.com/aliqin/grunt-micro-tpl-compiler.git"
+        "url": "https://github.com/woodsrong/grunt-micro-tpl-compiler.git"
     },
     "bugs": {
-        "url": "https://github.com/aliqin/grunt-micro-tpl-compiler/issues"
+        "url": "https://github.com/woodsrong/grunt-micro-tpl-compiler/issues"
     },
     "licenses": [
         {
             "type": "MIT",
-            "url": "https://github.com/aliqin/grunt-micro-tpl-compiler/blob/master/LICENSE"
+            "url": "https://github.com/woodsrong/grunt-micro-tpl-compiler/blob/master/LICENSE"
         }
     ],
     "engines": {
